@@ -50,7 +50,18 @@ export default function Home() {
 .order("created_at", { ascending: false });
         if (error) throw error;
         if (alive && Array.isArray(data) && data.length > 0) {
-          setProducts(data);
+          setProducts(
+  (data || []).map((p) => ({
+    id: p.id,
+    nome: p.name,
+    descricao: p.description,
+    preco: p.price,
+    estoque: p.stock,
+    categoria: p.category,
+    imagem: p.image_url,
+    ativo: p.active,
+  }))
+);
           setSource("supabase");
         } else if (alive && Array.isArray(data) && data.length === 0) {
           setProducts([]);
