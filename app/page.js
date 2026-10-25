@@ -44,10 +44,10 @@ export default function Home() {
       try {
         const supabase = createClient(url, key);
         const { data, error } = await supabase
-          .from("produtos")
-          .select("id,nome,descricao,preco,estoque,categoria,imagem,ativo")
-          .eq("ativo", true)
-          .order("created_at", { ascending: false });
+          .from("products")
+.select("id,name,description,price,stock,category,image_url,active,created_at")
+.eq("active", true)
+.order("created_at", { ascending: false });
         if (error) throw error;
         if (alive && Array.isArray(data) && data.length > 0) {
           setProducts(data);
